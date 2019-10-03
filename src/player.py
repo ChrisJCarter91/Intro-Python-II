@@ -2,11 +2,15 @@
 # currently.
 
 class Player:
-    def __init__(self, name, location):
+    def __init__(self, name, current_room):
         self.name = name
-        self.location = location
+        self.current_room = current_room
 
-    def make_move(self, new_location):
-        self.location = new_location
-        print(f"You are in the {self.location.name}")
-        print(self.location.description)
+    def __str__(self):
+        return f"\nYou are currently in the Location: \n Location ===> {self.current_room}\n"
+
+    def move(self, direction):
+        if getattr(self.current_room, f"{direction}_to"):
+            self.current_room = getattr(self.current_room, f"{direction}_to")
+        else:
+            print(f"\n There is a wall in that direction, try again")

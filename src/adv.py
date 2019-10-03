@@ -40,7 +40,7 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-player = Player("1", room["outside"])
+#player = Player("1", room["outside"])
 
 # Write a loop that:
 #
@@ -53,29 +53,20 @@ player = Player("1", room["outside"])
 #
 # If the user enters "q", quit the game.
 
-def get_room(local):
-    print(local.name)
-    print(local.description)
+gameActive = True
 
-move_choices = ["n", "s", "e", "w"]
-def get_move():
-    if mv not in move_choices:
-        print("invalid Direction")
-        return player.location
-    else:
-        if mv == "n" and hasattr(player.location,"n_to"):
-            next_room = player.location.n_to
-            #print(mv)
-            return(next_room)
-        elif mv == "s" and hasattr(player.location, "s_to"):
-            next_room = player.location.s_to
-            #print(mv)
-            return(next_room)
-        elif mv == "e" and hasattr(player.location, "e_to"):
-            next_room = player.location.e_to
-            #print(mv)
-            return(next_room)
-        elif mv == "w" and hasattr(player.location, "w.to"):
-            next_room = player.location.w_to
-            #print(mv)
-            return(next_room)
+name = input("What is your name Champion?:")
+player = Player(name, room["outside"])
+
+valid = ["n", "e", "s", "w" ]
+
+userInput = input("Please enter your direction [N] [E] [S] [W] then [Enter]: ")
+
+if userInput in valid :
+    player.move(userInput)
+
+elif userInput == "q":
+    gameActive = False
+
+else: 
+    print("\n Invalid Input")
